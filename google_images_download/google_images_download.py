@@ -69,7 +69,7 @@ def user_input():
         parser.add_argument('-pk', '--prefix_keywords', help='comma separated additional words added before main keyword', type=str, required=False)
         parser.add_argument('-l', '--limit', help='delimited list input', type=str, required=False)
         parser.add_argument('-f', '--format', help='download images with specific format', type=str, required=False,
-                            choices=['jpg', 'gif', 'png', 'bmp', 'svg', 'webp', 'ico'])
+                            choices=['jpg', 'gif', 'png', 'bmp', 'svg', 'webp', 'ico', 'pdf'])
         parser.add_argument('-u', '--url', help='search with google image URL', type=str, required=False)
         parser.add_argument('-x', '--single_image', help='downloading a single image from URL', type=str, required=False)
         parser.add_argument('-o', '--output_directory', help='download images in a specific main directory', type=str, required=False)
@@ -286,7 +286,7 @@ class googleimagesdownload:
     #function to download single image
     def single_image(self,image_url):
         main_directory = "downloads"
-        extensions = (".jpg", ".gif", ".png", ".bmp", ".svg", ".webp", ".ico")
+        extensions = (".jpg", ".gif", ".png", ".bmp", ".svg", ".webp", ".ico", ".pdf")
         url = image_url
         try:
             os.makedirs(main_directory)
@@ -401,7 +401,7 @@ class googleimagesdownload:
                   'type':[arguments['type'],{'face':'itp:face','photo':'itp:photo','clipart':'itp:clipart','line-drawing':'itp:lineart','animated':'itp:animated'}],
                   'time':[arguments['time'],{'past-24-hours':'qdr:d','past-7-days':'qdr:w','past-month':'qdr:m','past-year':'qdr:y'}],
                   'aspect_ratio':[arguments['aspect_ratio'],{'tall':'iar:t','square':'iar:s','wide':'iar:w','panoramic':'iar:xw'}],
-                  'format':[arguments['format'],{'jpg':'ift:jpg','gif':'ift:gif','png':'ift:png','bmp':'ift:bmp','svg':'ift:svg','webp':'webp','ico':'ift:ico','raw':'ift:craw'}]}
+                  'format':[arguments['format'],{'jpg':'ift:jpg','gif':'ift:gif','png':'ift:png','bmp':'ift:bmp','svg':'ift:svg','webp':'webp','ico':'ift:ico','raw':'ift:craw','pdf':'ift:pdf'}]}
         for key, value in params.items():
             if value[0] is not None:
                 ext_param = value[1][value[0]]
@@ -600,7 +600,7 @@ class googleimagesdownload:
                 data = response.read()
                 response.close()
 
-                extensions = [".jpg", ".jpeg", ".gif", ".png", ".bmp", ".svg", ".webp", ".ico"]
+                extensions = [".jpg", ".jpeg", ".gif", ".png", ".bmp", ".svg", ".webp", ".ico", ".pdf"]
                 # keep everything after the last '/'
                 image_name = str(image_url[(image_url.rfind('/')) + 1:])
                 if format:
